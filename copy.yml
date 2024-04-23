@@ -5,34 +5,14 @@
   apache_package: apache2
   document_root: /var/www/html
 
-tasks:
-  - name: Install Apache2
-    apt:
-      name: "{{ apache_package }}"
-      state: present
-
-  - name: Deploy Static Website
-    copy:
-      src: index.html
-      dest: "{{ document_root }}"
-
   tasks:
-    - name: Install packages
+    - name: Install Apache2
       apt:
-        name: apache2
+        name: "{{ apache_package }}"
         state: present
-      ignoe_errors: yes
-    - name: Start Apache server
-      service:
-        name: apache2
-        state: started
-    - name: Add firewall rules
-      ufw:
-        rule: allow
-        port: 80
-        proto: tcp
-    - name: Deploy static website
+
+    - name: Deploy Static Website
       copy:
         src: index.html
-        dest: /var/www/html/
+        dest: "{{ document_root }}"
 ...
