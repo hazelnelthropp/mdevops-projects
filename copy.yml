@@ -1,9 +1,9 @@
 ---
 - hosts: webservers 
-  become: True
+  become: true
   vars:
-  apache_package: apache2
-  document_root: /var/www/html
+    apache_package: apache2
+    document_root: /var/www/html
 
   tasks:
     - name: Install Apache2
@@ -15,4 +15,4 @@
       copy:
         src: index.html
         dest: "{{ document_root }}"
-...
+
